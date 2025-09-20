@@ -142,12 +142,12 @@
         .setting-card .arrow { color: var(--text-light); font-size: 1.125em; }
         
         .settings-section { background-color: #fff; border-radius: 15px; padding: 15px 20px; margin-bottom: 20px; box-shadow: 0 4px 15px rgba(90, 110, 96, 0.08); }
-        .settings-section h3 { font-size: 1em; margin: 0 0 15px 0; border-bottom: 1px solid var(--placeholder-bg); padding-bottom: 10px; }
+        .settings-section h3 { font-size: 1em; margin: 0 0 15px 0; }
         .control-group { margin-bottom: 15px; }
         .control-group:last-child { margin-bottom: 5px; }
         .control-group label { display: block; font-size: 0.875em; margin-bottom: 8px; color: var(--text-light); }
         .btn { display: block; width: 100%; padding: 10px; background-color: var(--placeholder-bg); border: none; border-radius: 8px; font-family: var(--font-main); color: var(--text-color); font-size: 0.9375em; cursor: pointer; text-align: center; }
-        .input-field, .textarea-field, .select-field { width: 100%; padding: 10px; border: 1px solid #e0e0e0; border-radius: 8px; box-sizing: border-box; font-family: var(--font-main); font-size: 0.875em; background-color: #fdfdfd; }
+        .input-field, .textarea-field { width: 100%; padding: 10px; border: 1px solid #e0e0e0; border-radius: 8px; box-sizing: border-box; font-family: var(--font-main); font-size: 0.875em; background-color: #fdfdfd; }
         .textarea-field { resize: vertical; min-height: 150px; white-space: pre; overflow-wrap: normal; overflow-x: scroll; }
         .slider-container { display: flex; align-items: center; gap: 15px; }
         .slider-container span { font-size: 0.875em; color: var(--text-light); }
@@ -159,9 +159,9 @@
         #font-preview { font-size: 1.5em; font-weight: bold; margin-bottom: 10px !important; }
         #font-details { font-size: 0.8em; color: var(--text-light); }
         
-        #wallpaper-preview, #lockscreen-wallpaper-preview { width: 140px; height: 280px; margin: 0 auto; background-color: var(--placeholder-bg); border-radius: 15px; border: 3px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); background-size: cover; background-repeat: no-repeat; background-position: center; transition: background-image 0.3s ease-in-out; display: flex; justify-content: center; align-items: center; color: var(--text-light); font-size: 0.9em; }
-        .settings-section label.toggle-label { display: flex; align-items: center; justify-content: space-between; cursor: pointer; font-size: 0.9375em; margin-bottom: 10px; padding: 10px 0; }
-        .settings-section label.toggle-label input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
+        #wallpaper-preview { width: 140px; height: 280px; margin: 0 auto; background-color: var(--placeholder-bg); border-radius: 15px; border: 3px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.1); background-size: cover; background-repeat: no-repeat; background-position: center; transition: background-image 0.3s ease-in-out; display: flex; justify-content: center; align-items: center; color: var(--text-light); font-size: 0.9em; }
+        .settings-section label { display: flex; align-items: center; gap: 10px; cursor: pointer; font-size: 0.875em; margin-bottom: 10px; }
+        .settings-section label input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
         
         .icon-setting-group { margin-bottom: 25px; }
         .icon-setting-group h4 { font-size: 0.9em; margin: 0 0 10px; color: var(--text-color); border-bottom: 1px solid var(--placeholder-bg); padding-bottom: 8px; }
@@ -174,62 +174,67 @@
         #theme-color-preview { width: 80px; height: 80px; border-radius: 50%; background-color: var(--placeholder-bg); border: 4px solid #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.1); transition: background-color 0.3s; margin: 0 auto 20px; }
         #theme-color-hex { font-family: monospace; text-transform: uppercase; text-align: center; }
 
-        /* --- 锁屏新增样式 --- */
-        #lock-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 10000;
-            background-color: #ffffff;
-            background-size: cover;
-            background-position: center;
-            color: #fff;
+        .saved-font-item { display: flex; justify-content: space-between; align-items: center; padding: 12px 15px; background-color: var(--placeholder-bg); border-radius: 10px; margin-bottom: 10px; cursor: pointer; transition: background-color 0.2s, transform 0.2s; font-size: 0.9375em; }
+        .saved-font-item:hover { background-color: #e0e8e1; transform: scale(1.02); }
+        .saved-font-name { flex-grow: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding-right: 10px; }
+        .delete-font-btn { background: none; border: none; cursor: pointer; font-size: 1.5em; color: var(--text-light); padding: 0 5px; line-height: 1; transition: color 0.2s; }
+        .delete-font-btn:hover { color: var(--battery-low); }
+        #saved-fonts-toggle .arrow { transition: transform 0.3s ease; display: inline-block; }
+        #saved-fonts-toggle.expanded .arrow { transform: rotate(180deg); }
+
+        /* --- START: Styles from API Config --- */
+        #api-config-page { background-color: var(--screen-bg); }
+        #api-config-page .app-header {
+            padding: 10px 20px;
+            margin-top: 45px;
+            position: relative;
             display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: space-between;
-            padding: 80px 0 40px;
-            box-sizing: border-box;
-            opacity: 1;
-            visibility: visible;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        #lock-screen.hidden { opacity: 0; visibility: hidden; }
+        #api-config-page .app-title { flex-grow: 1; text-align: center; }
+        
+        #api-config-page .page-container { flex-grow: 1; overflow-y: auto; padding: 15px 20px; }
+        #api-config-page .page-container::-webkit-scrollbar { display: none; }
+        #api-config-page .page-view { display: none; }
+        #api-config-page .page-view.active { display: block; }
+        
+        #api-config-page .btn { padding: 12px; border-radius: 10px; transition: background-color 0.2s, opacity 0.2s; }
+        #api-config-page .btn:hover { background-color: #dce6dd; }
+        #api-config-page .btn:disabled { opacity: 0.6; cursor: not-allowed; background-color: var(--placeholder-bg); }
+        
+        #api-config-page .input-field, #api-config-page .textarea-field, #api-config-page .select-field { width: 100%; padding: 12px; border: 1px solid #e0e0e0; border-radius: 10px; box-sizing: border-box; font-family: var(--font-main); font-size: 0.9em; background-color: #fdfdfd; transition: border-color 0.2s, box-shadow 0.2s; }
+        #api-config-page .input-field:focus, #api-config-page .textarea-field:focus, #api-config-page .select-field:focus { outline: none; border-color: var(--text-color); box-shadow: 0 0 8px rgba(90, 110, 96, 0.15); }
+        
+        #api-config-page .textarea-field { min-height: 100px; }
+        #api-config-page .input-with-button { display: flex; align-items: center; gap: 10px; }
+        #api-config-page .input-with-button .input-field { flex-grow: 1; }
+        #api-config-page .input-with-button .btn-icon { padding: 10px; line-height: 0; background-color: var(--placeholder-bg); border-radius: 10px; cursor: pointer; border: none; }
+        #api-config-page .input-with-button .btn-icon svg { width: 20px; height: 20px; fill: var(--text-color); }
+        
+        #connection-status { margin-top: 15px; text-align: center; font-size: 0.9em; min-height: 1.2em; transition: color 0.3s; }
+        #connection-status.success { color: var(--battery-charging); }
+        #connection-status.error { color: var(--battery-low); }
 
-        .lock-screen-content { text-align: center; text-shadow: 0 2px 5px rgba(0,0,0,0.4); }
-        #lock-screen-time { font-size: 5.5em; font-weight: 700; }
-        #lock-screen-date { font-size: 1.25em; font-weight: 400; margin-top: 5px; }
-        .lock-screen-unlock-hint { font-size: 1.1em; font-weight: 500; text-shadow: 0 1px 3px rgba(0,0,0,0.3); animation: slide-up-hint 2s infinite ease-out; }
+        #api-config-page .app-footer { flex-shrink: 0; display: flex; justify-content: space-around; padding: 10px 0; background-color: #fff; box-shadow: 0 -5px 20px rgba(90, 110, 96, 0.08); border-top: 1px solid #f0f0f0; }
+        #api-config-page .nav-btn { background: none; border: none; font-family: var(--font-main); font-size: 0.9em; color: var(--text-light); cursor: pointer; padding: 5px 15px; border-radius: 8px; transition: color 0.2s, background-color 0.2s; }
+        #api-config-page .nav-btn.active { color: var(--text-color); font-weight: bold; background-color: var(--placeholder-bg); }
 
-        @keyframes slide-up-hint { 0%, 100% { opacity: 0.8; transform: translateY(0); } 50% { opacity: 1; transform: translateY(-8px); } }
+        .preset-list-item { display: flex; justify-content: space-between; align-items: center; padding: 15px; margin-bottom: 10px; background-color: #fdfdfd; border-radius: 10px; border: 1px solid #e8f0e9; }
+        .preset-name { font-weight: bold; margin-right: 15px; }
+        .preset-actions { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
+        .preset-actions .btn-sm { padding: 6px 12px; font-size: 0.85em; min-width: 60px; }
+        .btn-delete { background-color: #fbeae8; color: var(--battery-low); }
 
-        #passcode-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            z-index: 9999;
-            background-color: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
-        }
-        #passcode-screen.visible { opacity: 1; visibility: visible; }
-        #passcode-screen.shake .passcode-dots { animation: shake-anim 0.5s; }
-        @keyframes shake-anim { 0%, 100% { transform: translateX(0); } 10%, 30%, 50%, 70%, 90% { transform: translateX(-8px); } 20%, 40%, 60%, 80% { transform: translateX(8px); } }
-
-        .passcode-container { text-align: center; }
-        .passcode-title { font-size: 1.25em; color: #333; font-weight: 500; margin-bottom: 20px; }
-        .passcode-dots { display: flex; gap: 20px; margin-bottom: 60px; }
-        .passcode-dot { width: 15px; height: 15px; border-radius: 50%; border: 1.5px solid #555; transition: background-color 0.2s; }
-        .passcode-dot.filled { background-color: #333; border-color: #333; }
-
-        .passcode-keyboard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-        .keyboard-btn {
-            width: 75px; height: 75px; border-radius: 50%;
-            background-color: rgba(200, 200, 200, 0.4);
-            border: none;
-            font-size: 2em; color: #111;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; transition: background-color 0.2s;
-        }
-        .keyboard-btn:active { background-color: rgba(180, 180, 180, 0.6); }
-        .keyboard-btn.delete { font-size: 1.2em; }
+        .custom-prompt-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(0,0,0,0.4); display: none; justify-content: center; align-items: center; z-index: 1000; }
+        .custom-prompt-overlay.visible { display: flex; }
+        .custom-prompt-box { background-color: var(--screen-bg); padding: 25px; border-radius: 15px; width: 80%; max-width: 320px; box-shadow: 0 10px 30px rgba(0,0,0,0.2); transform: scale(0.95); transition: transform 0.2s; }
+        .custom-prompt-overlay.visible .custom-prompt-box { transform: scale(1); }
+        .custom-prompt-box h3 { margin: 0 0 15px 0; font-size: 1.1em; color: var(--text-color); }
+        .custom-prompt-box .input-field { margin-bottom: 20px; }
+        .custom-prompt-buttons { display: flex; justify-content: flex-end; gap: 10px; }
+        .custom-prompt-buttons .btn { width: auto; padding: 8px 20px; }
+        .custom-prompt-buttons .btn-primary { background-color: var(--text-color); color: white; }
+        /* --- END: Styles from API Config --- */
     </style>
 </head>
 <body>
@@ -287,7 +292,7 @@
             </main>
             <footer class="dock">
                 <a href="javascript:void(0);" class="dock-icon" id="beautify-app-icon"><div class="dock-icon-placeholder" id="dock-icon-1"></div></a>
-                <a href="#" class="dock-icon"><div class="dock-icon-placeholder" id="dock-icon-2"></div></a>
+                <a href="javascript:void(0);" class="dock-icon" id="api-config-app-icon"><div class="dock-icon-placeholder" id="dock-icon-2"></div></a>
                 <a href="#" class="dock-icon"><div class="dock-icon-placeholder" id="dock-icon-3"></div></a>
                 <a href="#" class="dock-icon"><div class="dock-icon-placeholder" id="dock-icon-4"></div></a>
             </footer>
@@ -331,6 +336,16 @@
                         <input type="text" id="font-url-input" class="input-field" placeholder="https://.../font.ttf">
                     </div>
                 </div>
+                <!-- 已保存列表 -->
+                <div class="settings-section">
+                    <h3 id="saved-fonts-toggle" style="cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                        <span>已保存列表</span>
+                        <span class="arrow">▼</span>
+                    </h3>
+                    <div id="saved-fonts-list-container" style="display: none; margin-top: 10px;">
+                        <!-- Saved font items will be injected here by JS -->
+                    </div>
+                </div>
                 <div class="settings-section">
                     <h3>字体大小/粗细</h3>
                     <div class="control-group">
@@ -363,15 +378,15 @@
             </div>
         </div>
         
-        <!-- 壁纸/锁屏 设置页面 -->
+        <!-- 壁纸设置页面 -->
         <div id="wallpaper-settings-page" class="page">
             <header class="app-header">
                 <div class="back-button" id="wallpaper-settings-back-button"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg></div>
-                <h2 class="app-title">自定义壁纸/锁屏</h2>
+                <h2 class="app-title">壁纸设置</h2>
             </header>
             <div class="app-content-area">
                 <div class="settings-section">
-                    <h3>桌面壁纸</h3>
+                    <h3>图片来源</h3>
                     <div class="control-group">
                         <button class="btn" id="upload-wallpaper-btn">上传本地图片</button>
                         <input type="file" id="wallpaper-file-input" accept="image/*" style="display:none;">
@@ -380,75 +395,17 @@
                         <label for="wallpaper-url-input">输入图片URL</label>
                         <input type="text" id="wallpaper-url-input" class="input-field" placeholder="https://example.com/image.jpg">
                     </div>
-                    <div id="wallpaper-preview-section">
-                         <label>实时预览</label>
+                </div>
+                <div class="settings-section">
+                    <label>
+                        <input type="checkbox" id="enable-wallpaper-preview"> 启用实时预览
+                    </label>
+                    <div id="wallpaper-preview-section" style="display:none;">
                         <div id="wallpaper-preview"></div>
                     </div>
-                     <div class="control-group" style="margin-top:15px;">
-                        <button class="btn btn-restore" id="restore-wallpaper-defaults">恢复默认</button>
-                    </div>
                 </div>
                 <div class="settings-section">
-                    <h3>锁屏壁纸</h3>
-                    <div class="control-group">
-                        <button class="btn" id="upload-lockscreen-wallpaper-btn">上传本地图片</button>
-                        <input type="file" id="lockscreen-wallpaper-file-input" accept="image/*" style="display:none;">
-                    </div>
-                    <div class="control-group">
-                        <label for="lockscreen-wallpaper-url-input">输入图片URL</label>
-                        <input type="text" id="lockscreen-wallpaper-url-input" class="input-field" placeholder="https://example.com/image.jpg">
-                    </div>
-                     <div id="lockscreen-wallpaper-preview-section">
-                        <label>实时预览</label>
-                        <div id="lockscreen-wallpaper-preview"></div>
-                    </div>
-                    <div class="control-group" style="margin-top:15px;">
-                        <button class="btn btn-restore" id="restore-lockscreen-wallpaper-defaults">恢复默认 (纯白)</button>
-                    </div>
-                </div>
-                 <div class="setting-card" id="to-lock-screen-settings-card">
-                    <span>锁屏详细设置</span>
-                    <span class="arrow">></span>
-                </div>
-            </div>
-        </div>
-
-        <!-- 锁屏详细设置页面 -->
-        <div id="lock-screen-settings-page" class="page">
-            <header class="app-header">
-                <div class="back-button" id="lock-screen-settings-back-button"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg></div>
-                <h2 class="app-title">锁屏详细设置</h2>
-            </header>
-            <div class="app-content-area">
-                <div class="settings-section">
-                    <h3>锁屏密码</h3>
-                    <label class="toggle-label">
-                        <span>启用锁屏密码</span>
-                        <input type="checkbox" id="enable-passcode-toggle">
-                    </label>
-                    <div class="control-group">
-                        <label for="passcode-input">设置6位密码</label>
-                        <input type="number" id="passcode-input" class="input-field" placeholder="输入6位数字密码" maxlength="6">
-                    </div>
-                </div>
-                <div class="settings-section">
-                    <h3>日期与时钟</h3>
-                    <div class="control-group">
-                        <label for="lock-screen-date-format-input">日期样式</label>
-                        <input type="text" id="lock-screen-date-format-input" class="input-field">
-                    </div>
-                    <div class="control-group">
-                        <label for="lock-screen-clock-font-select">时钟字体</label>
-                        <select id="lock-screen-clock-font-select" class="select-field">
-                            <option value="-apple-system, BlinkMacSystemFont, 'San Francisco', 'Helvetica Neue', Arial, sans-serif">iOS 粗体 (默认)</option>
-                            <option value="'Courier New', Courier, monospace">打字机体</option>
-                            <option value="'Times New Roman', Times, serif">衬线体</option>
-                            <option value="'Lucida Console', Monaco, monospace">终端体</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="settings-section">
-                    <button class="btn btn-restore" id="restore-lock-screen-settings-defaults">恢复默认</button>
+                    <button class="btn btn-restore" id="restore-wallpaper-defaults">恢复默认</button>
                 </div>
             </div>
         </div>
@@ -501,9 +458,9 @@
             <div class="app-content-area">
                 <div class="settings-section">
                     <h3>选项</h3>
-                    <label class="toggle-label">
-                        <span>使用纯白/透明底部栏 (不跟随主题色)</span>
+                    <label>
                         <input type="checkbox" id="dock-white-bg-toggle">
+                        使用纯白/透明底部栏 (不跟随主题色)
                     </label>
                 </div>
                 <div class="settings-section">
@@ -540,9 +497,9 @@
             <div class="app-content-area">
                 <div class="settings-section">
                     <h3>选项</h3>
-                    <label class="toggle-label">
-                        <span>启用头像框</span>
+                    <label>
                         <input type="checkbox" id="enable-avatar-frame-toggle">
+                        启用头像框
                     </label>
                 </div>
                 <div class="settings-section">
@@ -596,6 +553,68 @@
             </div>
         </div>
 
+        <!-- START: API Config Page -->
+        <div id="api-config-page" class="page">
+            <header class="app-header">
+                <div class="back-button" id="api-config-back-button"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path></svg></div>
+                <h2 class="app-title" id="app-page-title">API 配置</h2>
+            </header>
+
+            <div class="page-container">
+                <div id="config-page" class="page-view active">
+                    <div class="settings-section">
+                        <div class="control-group">
+                            <label for="api-provider-select">服务商</label>
+                            <select id="api-provider-select" class="select-field">
+                                <option value="openai">OpenAI</option>
+                                <option value="gemini">Gemini</option>
+                                <option value="deepseek">DeepSeek</option>
+                                <option value="claude">Claude</option>
+                                <option value="reverse_proxy">反向代理</option>
+                                <option value="custom">自定义 (OpenAI 格式)</option>
+                                <option value="polling">轮询</option>
+                            </select>
+                        </div>
+                        <div class="control-group">
+                            <label for="api-url-input">API URL</label>
+                            <input type="text" id="api-url-input" class="input-field">
+                        </div>
+                        <div class="control-group">
+                            <label for="api-key-input">API Key</label>
+                            <div class="input-with-button">
+                                <input type="password" id="api-key-input" class="input-field">
+                                <textarea id="api-key-textarea" class="textarea-field" style="display: none;" placeholder="每行输入一个 Key"></textarea>
+                                <button id="toggle-api-key-visibility" class="btn-icon">
+                                    <svg viewBox="0 0 24 24"><path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"></path></svg>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label for="api-model-select">模型</label>
+                            <select id="api-model-select" class="select-field"></select>
+                        </div>
+                    </div>
+                    <div class="settings-section">
+                        <button class="btn" id="test-connection-btn">连接测试 & 拉取模型</button>
+                        <p id="connection-status"></p>
+                    </div>
+                    <div class="settings-section">
+                        <button class="btn" id="save-api-settings-btn" style="background-color: var(--text-color); color: white;">保存设置</button>
+                        <button class="btn btn-restore" id="restore-api-defaults-btn">恢复默认</button>
+                    </div>
+                </div>
+                <div id="presets-page" class="page-view">
+                    <div id="presets-list-container"></div>
+                </div>
+            </div>
+
+            <footer class="app-footer">
+                <button id="nav-config-btn" class="nav-btn active">配置</button>
+                <button id="nav-presets-btn" class="nav-btn">预设</button>
+            </footer>
+        </div>
+        <!-- END: API Config Page -->
+
     </div>
 
     <div class="modal-overlay" id="edit-modal">
@@ -608,39 +627,19 @@
             </div>
         </div>
     </div>
-    
-    <!-- 锁屏 & 密码输入界面 -->
-    <div id="lock-screen">
-        <div class="lock-screen-content">
-            <div id="lock-screen-time"></div>
-            <div id="lock-screen-date"></div>
-        </div>
-        <div class="lock-screen-unlock-hint">向上滑动解锁</div>
-    </div>
 
-    <div id="passcode-screen">
-        <div class="passcode-container">
-            <div class="passcode-title">输入密码</div>
-            <div class="passcode-dots">
-                <div class="passcode-dot"></div><div class="passcode-dot"></div><div class="passcode-dot"></div>
-                <div class="passcode-dot"></div><div class="passcode-dot"></div><div class="passcode-dot"></div>
-            </div>
-            <div class="passcode-keyboard">
-                <button class="keyboard-btn" data-key="1">1</button>
-                <button class="keyboard-btn" data-key="2">2</button>
-                <button class="keyboard-btn" data-key="3">3</button>
-                <button class="keyboard-btn" data-key="4">4</button>
-                <button class="keyboard-btn" data-key="5">5</button>
-                <button class="keyboard-btn" data-key="6">6</button>
-                <button class="keyboard-btn" data-key="7">7</button>
-                <button class="keyboard-btn" data-key="8">8</button>
-                <button class="keyboard-btn" data-key="9">9</button>
-                <div></div>
-                <button class="keyboard-btn" data-key="0">0</button>
-                <button class="keyboard-btn delete" data-key="del">⌫</button>
+    <!-- START: API Config Custom Prompt Modal -->
+    <div id="custom-prompt" class="custom-prompt-overlay">
+        <div class="custom-prompt-box">
+            <h3 id="custom-prompt-title">为预设命名</h3>
+            <input type="text" id="custom-prompt-input" class="input-field" placeholder="请输入名称">
+            <div class="custom-prompt-buttons">
+                <button id="custom-prompt-cancel" class="btn">取消</button>
+                <button id="custom-prompt-confirm" class="btn btn-primary">保存</button>
             </div>
         </div>
     </div>
+    <!-- END: API Config Custom Prompt Modal -->
 
 
     <script>
@@ -657,12 +656,14 @@
                 themeSettings: document.getElementById('theme-settings-page'),
                 dockSettings: document.getElementById('dock-settings-page'),
                 avatarFrameSettings: document.getElementById('avatar-frame-settings-page'),
-                lockScreenSettings: document.getElementById('lock-screen-settings-page'),
+                apiConfig: document.getElementById('api-config-page') // <-- Added API Config page
             };
 
             const navigation = {
                 toBeautify: document.getElementById('beautify-app-icon'),
+                toApiConfig: document.getElementById('api-config-app-icon'), // <-- Added API Config Icon
                 backFromBeautify: document.getElementById('beautify-back-button'),
+                backFromApiConfig: document.getElementById('api-config-back-button'), // <-- Added API Config back button
                 toFontSettings: document.getElementById('font-settings-card'),
                 backFromFontSettings: document.getElementById('font-settings-back-button'),
                 toWallpaperSettings: document.getElementById('wallpaper-settings-card'),
@@ -674,9 +675,7 @@
                 toDockSettings: document.getElementById('dock-settings-card'),
                 backFromDockSettings: document.getElementById('dock-settings-back-button'),
                 toAvatarFrameSettings: document.getElementById('avatar-frame-settings-card'),
-                backFromAvatarFrameSettings: document.getElementById('avatar-frame-settings-back-button'),
-                toLockScreenSettings: document.getElementById('to-lock-screen-settings-card'),
-                backFromLockScreenSettings: document.getElementById('lock-screen-settings-back-button'),
+                backFromAvatarFrameSettings: document.getElementById('avatar-frame-settings-back-button')
             };
 
             function showPage(pageToShow) {
@@ -685,7 +684,9 @@
             }
 
             navigation.toBeautify.addEventListener('click', () => showPage(pages.beautify));
+            navigation.toApiConfig.addEventListener('click', () => showPage(pages.apiConfig)); // <-- Added navigation
             navigation.backFromBeautify.addEventListener('click', () => showPage(pages.desktop));
+            navigation.backFromApiConfig.addEventListener('click', () => showPage(pages.desktop)); // <-- Added navigation
             navigation.toFontSettings.addEventListener('click', () => showPage(pages.fontSettings));
             navigation.backFromFontSettings.addEventListener('click', () => showPage(pages.beautify));
             navigation.toWallpaperSettings.addEventListener('click', () => showPage(pages.wallpaperSettings));
@@ -698,35 +699,122 @@
             navigation.backFromDockSettings.addEventListener('click', () => showPage(pages.beautify));
             navigation.toAvatarFrameSettings.addEventListener('click', () => showPage(pages.avatarFrameSettings));
             navigation.backFromAvatarFrameSettings.addEventListener('click', () => showPage(pages.beautify));
-            navigation.toLockScreenSettings.addEventListener('click', () => showPage(pages.lockScreenSettings));
-            navigation.backFromLockScreenSettings.addEventListener('click', () => showPage(pages.wallpaperSettings));
             
             let currentAvatarFrameURL = null;
 
-            // --- 字体设置 ---
-            const fontControls = { cssInput: document.getElementById('font-css-input'), sizeSlider: document.getElementById('font-size-slider'), weightSlider: document.getElementById('font-weight-slider'), previewDetails: document.getElementById('font-details'), dynamicStyle: document.getElementById('dynamic-font-style'), fontLinkContainer: document.getElementById('font-link-container'), restoreBtn: document.getElementById('restore-font-defaults') };
+            // --- 字体设置 (IndexedDB + 命名弹窗) ---
+            const fontControls = { cssInput: document.getElementById('font-css-input'), urlInput: document.getElementById('font-url-input'), fileInput: document.getElementById('font-file-input'), sizeSlider: document.getElementById('font-size-slider'), weightSlider: document.getElementById('font-weight-slider'), previewDetails: document.getElementById('font-details'), dynamicStyle: document.getElementById('dynamic-font-style'), fontLinkContainer: document.getElementById('font-link-container'), restoreBtn: document.getElementById('restore-font-defaults') };
+            const savedFontsToggle = document.getElementById('saved-fonts-toggle');
+            const savedFontsListContainer = document.getElementById('saved-fonts-list-container');
             let currentFontName = 'KingHwaOldSong';
             const defaultCssContent = `<link rel="preload" as="style" crossorigin href="https://fontsapi.zeoseven.com/309/main/result.css" onload="this.rel='stylesheet'" onerror="this.href='httpsapi-storage.zeoseven.com/309/main/result.css'" />\n<noscript>\n    <link rel="stylesheet" href="https://fontsapi.zeoseven.com/309/main/result.css" />\n</noscript>\n<style>\n    body { font-family: "KingHwaOldSong"; }\n</style>`;
             fontControls.cssInput.value = defaultCssContent;
+
+            let db;
+            function openDb() {
+                return new Promise((resolve, reject) => {
+                    const request = indexedDB.open('FontStorageDB', 1);
+                    request.onupgradeneeded = event => {
+                        db = event.target.result;
+                        db.createObjectStore('fonts', { keyPath: 'id', autoIncrement: true });
+                    };
+                    request.onsuccess = event => { db = event.target.result; resolve(db); };
+                    request.onerror = event => reject('Database error: ' + event.target.errorCode);
+                });
+            }
+            const addFontToDb = (font) => new Promise((resolve, reject) => { const transaction = db.transaction(['fonts'], 'readwrite'); const store = transaction.objectStore('fonts'); const request = store.add(font); request.onsuccess = resolve; request.onerror = reject; });
+            const getAllFontsFromDb = () => new Promise((resolve, reject) => { const transaction = db.transaction(['fonts'], 'readonly'); const store = transaction.objectStore('fonts'); const request = store.getAll(); request.onsuccess = () => resolve(request.result); request.onerror = reject; });
+            const deleteFontFromDb = (id) => new Promise((resolve, reject) => { const transaction = db.transaction(['fonts'], 'readwrite'); const store = transaction.objectStore('fonts'); const request = store.delete(id); request.onsuccess = resolve; request.onerror = reject; });
+
             function updateGlobalStyle(property, value) { document.documentElement.style.setProperty(property, value); updateFontPreview(); }
             function updateFontPreview() { const size = fontControls.sizeSlider.value + 'px'; const weight = fontControls.weightSlider.value; fontControls.previewDetails.textContent = `${currentFontName} / ${size} / ${weight}`; }
-            document.getElementById('upload-font-btn').addEventListener('click', () => document.getElementById('font-file-input').click());
-            document.getElementById('font-file-input').addEventListener('change', (event) => { const file = event.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = (e) => { const fontName = 'CustomLocalFont'; fontControls.dynamicStyle.innerHTML = `@font-face { font-family: '${fontName}'; src: url('${e.target.result}'); }`; currentFontName = fontName; updateGlobalStyle('--font-main', `'${fontName}', sans-serif`); }; reader.readAsDataURL(file); });
+            
+            async function renderSavedFontsList() {
+                const fonts = await getAllFontsFromDb();
+                savedFontsListContainer.innerHTML = '';
+                if (fonts.length === 0) { savedFontsListContainer.innerHTML = '<p style="text-align: center; color: var(--text-light); font-size: 0.8em;">暂无已保存字体</p>'; return; }
+                fonts.forEach(font => {
+                    const item = document.createElement('div');
+                    item.className = 'saved-font-item';
+                    item.dataset.fontId = font.id;
+                    item.innerHTML = `<span class="saved-font-name" title="${font.name}">${font.name}</span><button class="delete-font-btn" data-font-id="${font.id}">×</button>`;
+                    savedFontsListContainer.appendChild(item);
+                });
+            }
+
+            function applySavedFont(font) {
+                let fontUrl;
+                if (font.type === 'data' && font.value instanceof Blob) {
+                    fontUrl = URL.createObjectURL(font.value);
+                } else {
+                    fontUrl = font.value;
+                }
+                const cssFontName = `SavedFont_${font.name.replace(/[^a-zA-Z0-9]/g, '')}_${Date.now()}`;
+                fontControls.dynamicStyle.innerHTML = `@font-face { font-family: '${cssFontName}'; src: url('${fontUrl}'); }`;
+                currentFontName = font.name;
+                updateGlobalStyle('--font-main', `'${cssFontName}', sans-serif`);
+            }
+
+            savedFontsToggle.addEventListener('click', () => { const isExpanded = savedFontsListContainer.style.display === 'block'; savedFontsListContainer.style.display = isExpanded ? 'none' : 'block'; savedFontsToggle.classList.toggle('expanded', !isExpanded); });
+            savedFontsListContainer.addEventListener('click', async (e) => {
+                const target = e.target;
+                if (target.classList.contains('delete-font-btn')) {
+                    e.stopPropagation();
+                    const fontId = parseInt(target.dataset.fontId, 10);
+                    await deleteFontFromDb(fontId);
+                    renderSavedFontsList();
+                } else {
+                    const item = target.closest('.saved-font-item');
+                    if (item) {
+                        const fontId = parseInt(item.dataset.fontId, 10);
+                        const fonts = await getAllFontsFromDb();
+                        const fontToApply = fonts.find(f => f.id === fontId);
+                        if (fontToApply) applySavedFont(fontToApply);
+                    }
+                }
+            });
+
+            document.getElementById('upload-font-btn').addEventListener('click', () => fontControls.fileInput.click());
+            fontControls.fileInput.addEventListener('change', (event) => {
+                const file = event.target.files[0]; if (!file) return;
+                const suggestedName = file.name.split('.').slice(0, -1).join('.') || '本地字体';
+                openModal('为字体命名', suggestedName, async (newName) => {
+                    if (newName) {
+                        const newFont = { name: newName, type: 'data', value: file };
+                        await addFontToDb(newFont);
+                        renderSavedFontsList();
+                        applySavedFont(newFont);
+                    }
+                }, true);
+            });
+            
+            fontControls.urlInput.addEventListener('blur', (e) => {
+                const url = e.target.value.trim(); if (!url) return;
+                let suggestedName = '网络字体';
+                try { const urlPath = new URL(url).pathname; const fileName = urlPath.split('/').pop(); if (/\.(woff2?|ttf|otf)$/i.test(fileName)) { suggestedName = fileName; } } catch (error) {}
+                openModal('为字体命名', suggestedName, async (newName) => {
+                    if (newName) {
+                        const newFont = { name: newName, type: 'url', value: url };
+                        await addFontToDb(newFont);
+                        renderSavedFontsList();
+                        applySavedFont(newFont);
+                    }
+                }, true);
+            });
+            
             fontControls.cssInput.addEventListener('input', () => { fontControls.fontLinkContainer.innerHTML = fontControls.cssInput.value; const match = fontControls.cssInput.value.match(/font-family:\s*["']?([^;"']+)["']?/); if (match && match[1]) { currentFontName = match[1]; updateGlobalStyle('--font-main', match[1]); } });
-            document.getElementById('font-url-input').addEventListener('input', (e) => { const url = e.target.value.trim(); if (!url) return; const fontName = 'CustomUrlFont'; fontControls.dynamicStyle.innerHTML = `@font-face { font-family: '${fontName}'; src: url('${url}'); }`; currentFontName = fontName; updateGlobalStyle('--font-main', `'${fontName}', sans-serif`); });
             fontControls.sizeSlider.addEventListener('input', () => updateGlobalStyle('--global-font-size', fontControls.sizeSlider.value + 'px'));
             fontControls.weightSlider.addEventListener('input', () => updateGlobalStyle('--global-font-weight', fontControls.weightSlider.value));
-            fontControls.restoreBtn.addEventListener('click', () => { currentFontName = 'KingHwaOldSong'; fontControls.cssInput.value = defaultCssContent; fontControls.fontLinkContainer.innerHTML = defaultCssContent; fontControls.dynamicStyle.innerHTML = ''; fontControls.sizeSlider.value = 16; fontControls.weightSlider.value = 400; updateGlobalStyle('--font-main', '"KingHwaOldSong", sans-serif'); updateGlobalStyle('--global-font-size', '16px'); updateGlobalStyle('--global-font-weight', '400'); });
+            fontControls.restoreBtn.addEventListener('click', () => { currentFontName = 'KingHwaOldSong'; fontControls.cssInput.value = defaultCssContent; fontControls.urlInput.value = ''; fontControls.fontLinkContainer.innerHTML = defaultCssContent; fontControls.dynamicStyle.innerHTML = ''; fontControls.sizeSlider.value = 16; fontControls.weightSlider.value = 400; updateGlobalStyle('--font-main', '"KingHwaOldSong", sans-serif'); updateGlobalStyle('--global-font-size', '16px'); updateGlobalStyle('--global-font-weight', '400'); });
 
             // --- 壁纸设置 ---
-            const wallpaperControls = { previewElement: document.getElementById('wallpaper-preview'), urlInput: document.getElementById('wallpaper-url-input'), restoreBtn: document.getElementById('restore-wallpaper-defaults') };
-            function applyWallpaper(imageUrl) { const urlString = imageUrl ? `url('${imageUrl}')` : 'none'; document.body.style.backgroundImage = urlString; wallpaperControls.previewElement.style.backgroundImage = urlString; localStorage.setItem('desktopWallpaper', imageUrl || ''); }
+            const wallpaperControls = { previewEnabledCheckbox: document.getElementById('enable-wallpaper-preview'), previewSection: document.getElementById('wallpaper-preview-section'), previewElement: document.getElementById('wallpaper-preview'), urlInput: document.getElementById('wallpaper-url-input'), restoreBtn: document.getElementById('restore-wallpaper-defaults') };
+            function applyWallpaper(imageUrl) { const urlString = imageUrl ? `url('${imageUrl}')` : 'none'; document.body.style.backgroundImage = urlString; if (wallpaperControls.previewEnabledCheckbox.checked) { wallpaperControls.previewElement.style.backgroundImage = urlString; } }
+            wallpaperControls.previewEnabledCheckbox.addEventListener('change', (e) => { wallpaperControls.previewSection.style.display = e.target.checked ? 'block' : 'none'; });
             document.getElementById('upload-wallpaper-btn').addEventListener('click', () => document.getElementById('wallpaper-file-input').click());
             document.getElementById('wallpaper-file-input').addEventListener('change', (event) => { const file = event.target.files[0]; if (file) { const reader = new FileReader(); reader.onload = (e) => applyWallpaper(e.target.result); reader.readAsDataURL(file); } });
             wallpaperControls.urlInput.addEventListener('input', (e) => applyWallpaper(e.target.value.trim()));
             wallpaperControls.restoreBtn.addEventListener('click', () => { applyWallpaper(null); wallpaperControls.urlInput.value = ''; });
-            const savedWallpaper = localStorage.getItem('desktopWallpaper'); if (savedWallpaper) { applyWallpaper(savedWallpaper); wallpaperControls.urlInput.value = savedWallpaper; }
-
 
             // --- 图标设置 ---
             const iconControlsContainer = document.getElementById('app-icon-controls');
@@ -755,7 +843,11 @@
 
             // --- 头像框设置 ---
             const avatarFrameControls = { toggle: document.getElementById('enable-avatar-frame-toggle'), uploadBtn: document.getElementById('upload-avatar-frame-btn'), fileInput: document.getElementById('avatar-frame-file-input'), urlInput: document.getElementById('avatar-frame-url-input'), restoreBtn: document.getElementById('restore-avatar-frame-defaults'), mainFrame: document.getElementById('avatar-frame-overlay'), previewFrame: document.getElementById('preview-avatar-frame'), mainAvatar: document.getElementById('avatar-container'), previewAvatar: document.getElementById('preview-avatar'), xSlider: document.getElementById('avatar-frame-x-slider'), ySlider: document.getElementById('avatar-frame-y-slider'), scaleSlider: document.getElementById('avatar-frame-scale-slider') };
-            function applyAvatarFrame() { const isEnabled = avatarFrameControls.toggle.checked; const imageUrl = avatarFrameControls.urlInput.value.trim(); const frameElements = [avatarFrameControls.mainFrame, avatarFrameControls.previewFrame]; const avatarElements = [avatarFrameControls.mainAvatar, avatarFrameControls.previewAvatar]; avatarElements.forEach(el => el.classList.toggle('avatar-framed', isEnabled)); frameElements.forEach(el => { el.style.backgroundImage = 'none'; el.style.boxShadow = 'none'; if (isEnabled) { if (imageUrl) { el.style.backgroundImage = `url('${imageUrl}')`; } else { el.style.boxShadow = '0 0 0 3px white, 0 4px 10px rgba(0,0,0,0.15)'; } } }); }
+            function applyAvatarFrame() {
+                const isEnabled = avatarFrameControls.toggle.checked; const imageUrl = avatarFrameControls.urlInput.value.trim(); const frameElements = [avatarFrameControls.mainFrame, avatarFrameControls.previewFrame]; const avatarElements = [avatarFrameControls.mainAvatar, avatarFrameControls.previewAvatar];
+                avatarElements.forEach(el => el.classList.toggle('avatar-framed', isEnabled));
+                frameElements.forEach(el => { el.style.backgroundImage = 'none'; el.style.boxShadow = 'none'; if (isEnabled) { if (imageUrl) { el.style.backgroundImage = `url('${imageUrl}')`; } else { el.style.boxShadow = '0 0 0 3px white, 0 4px 10px rgba(0,0,0,0.15)'; } } });
+            }
             function applyAvatarFrameTransform() { const x = avatarFrameControls.xSlider.value; const y = avatarFrameControls.ySlider.value; const scale = avatarFrameControls.scaleSlider.value; const transformValue = `translate(${x}px, ${y}px) scale(${scale})`; [avatarFrameControls.mainFrame, avatarFrameControls.previewFrame].forEach(el => { el.style.transform = transformValue; }); }
             avatarFrameControls.toggle.addEventListener('change', applyAvatarFrame);
             avatarFrameControls.uploadBtn.addEventListener('click', () => avatarFrameControls.fileInput.click());
@@ -766,217 +858,216 @@
             avatarFrameControls.scaleSlider.addEventListener('input', applyAvatarFrameTransform);
             avatarFrameControls.restoreBtn.addEventListener('click', () => { avatarFrameControls.toggle.checked = false; avatarFrameControls.urlInput.value = ''; avatarFrameControls.fileInput.value = ''; avatarFrameControls.xSlider.value = 0; avatarFrameControls.ySlider.value = 0; avatarFrameControls.scaleSlider.value = 1; if (currentAvatarFrameURL) { URL.revokeObjectURL(currentAvatarFrameURL); currentAvatarFrameURL = null; } applyAvatarFrame(); applyAvatarFrameTransform(); });
 
-            // --- 锁屏核心逻辑 ---
-            const lockScreen = document.getElementById('lock-screen');
-            const passcodeScreen = document.getElementById('passcode-screen');
-            const lockScreenTime = document.getElementById('lock-screen-time');
-            const lockScreenDate = document.getElementById('lock-screen-date');
+            // --- 编辑资料弹窗 ---
+            const modal = { overlay: document.getElementById('edit-modal'), title: document.getElementById('modal-title'), input: document.getElementById('modal-input'), save: document.getElementById('modal-save'), cancel: document.getElementById('modal-cancel') };
+            let onSaveCallback = null;
+            function openModal(title, value, onSave, isSingleLine = false) { onSaveCallback = onSave; modal.title.textContent = title; modal.input.value = value; modal.input.style.resize = isSingleLine ? 'none' : 'vertical'; modal.input.rows = isSingleLine ? 1 : 3; modal.overlay.classList.add('visible'); modal.input.focus(); }
+            function closeModal() { modal.overlay.classList.remove('visible'); onSaveCallback = null; }
+            modal.save.addEventListener('click', () => { if (onSaveCallback) onSaveCallback(modal.input.value); closeModal(); });
+            modal.cancel.addEventListener('click', closeModal);
+            modal.overlay.addEventListener('click', (e) => { if (e.target === modal.overlay) closeModal(); });
             
-            const lockScreenControls = {
-                wallpaperUrlInput: document.getElementById('lockscreen-wallpaper-url-input'),
-                wallpaperPreview: document.getElementById('lockscreen-wallpaper-preview'),
-                restoreWallpaperBtn: document.getElementById('restore-lockscreen-wallpaper-defaults'),
-                enablePasscodeToggle: document.getElementById('enable-passcode-toggle'),
-                passcodeInput: document.getElementById('passcode-input'),
-                dateFormatInput: document.getElementById('lock-screen-date-format-input'),
-                clockFontSelect: document.getElementById('lock-screen-clock-font-select'),
-                restoreSettingsBtn: document.getElementById('restore-lock-screen-settings-defaults'),
+            // --- 桌面信息编辑事件 ---
+            document.querySelector('.nickname').addEventListener('click', (e) => openModal('编辑昵称', e.target.textContent, (val) => e.target.textContent = val, true));
+            document.querySelector('.username').addEventListener('click', (e) => openModal('编辑ID', e.target.textContent, (val) => e.target.textContent = val, true));
+            document.querySelector('.bio').addEventListener('click', (e) => openModal('编辑签名', e.target.textContent, (val) => e.target.textContent = val));
+            document.querySelector('.location span').addEventListener('click', (e) => openModal('编辑地点', e.target.textContent, (val) => e.target.textContent = val, true));
+            
+            // --- START: API Config Page Logic ---
+            const apiConfigControls = { provider: document.getElementById('api-provider-select'), urlInput: document.getElementById('api-url-input'), keyInput: document.getElementById('api-key-input'), keyTextarea: document.getElementById('api-key-textarea'), toggleKey: document.getElementById('toggle-api-key-visibility'), model: document.getElementById('api-model-select'), testBtn: document.getElementById('test-connection-btn'), saveBtn: document.getElementById('save-api-settings-btn'), restoreBtn: document.getElementById('restore-api-defaults-btn'), status: document.getElementById('connection-status'), };
+            const apiPageControls = { title: document.getElementById('app-page-title'), configPage: document.getElementById('config-page'), presetsPage: document.getElementById('presets-page'), navConfigBtn: document.getElementById('nav-config-btn'), navPresetsBtn: document.getElementById('nav-presets-btn'), presetsListContainer: document.getElementById('presets-list-container') };
+            const apiPromptControls = { overlay: document.getElementById('custom-prompt'), title: document.getElementById('custom-prompt-title'), input: document.getElementById('custom-prompt-input'), cancelBtn: document.getElementById('custom-prompt-cancel'), confirmBtn: document.getElementById('custom-prompt-confirm'), };
+
+            const CORS_PROXY_URL = 'https://corsproxy.io/?';
+            const providerData = {
+                openai:   { url: 'https://api.openai.com/v1',                     useProxy: true, testable: true },
+                deepseek: { url: 'https://api.deepseek.com/v1',                   useProxy: true, testable: true },
+                gemini:   { url: 'https://generativelanguage.googleapis.com/v1beta', useProxy: true, testable: false, modelsEndpoint: false },
+                claude:   { url: 'https://api.anthropic.com/v1',                  useProxy: true, testable: false, modelsEndpoint: false },
+                reverse_proxy: { url: '', useProxy: false, testable: true },
+                custom:        { url: '', useProxy: false, testable: true },
+                polling:       { url: '', useProxy: false, testable: true }
             };
-
-            const defaultLockScreenSettings = {
-                wallpaper: '',
-                passcodeEnabled: false,
-                passcode: '',
-                dateFormat: 'x月x日星期x 农历时间',
-                clockFont: "-apple-system, BlinkMacSystemFont, 'San Francisco', 'Helvetica Neue', Arial, sans-serif",
-            };
-
-            let lockScreenSettings = JSON.parse(localStorage.getItem('lockScreenSettings')) || { ...defaultLockScreenSettings };
-
-            function saveLockScreenSettings() {
-                localStorage.setItem('lockScreenSettings', JSON.stringify(lockScreenSettings));
-            }
-
-            function applyLockScreenWallpaper(imageUrl) {
-                const urlString = imageUrl ? `url('${imageUrl}')` : 'none';
-                lockScreen.style.backgroundImage = urlString;
-                lockScreen.style.backgroundColor = imageUrl ? 'transparent' : '#ffffff';
-                lockScreenControls.wallpaperPreview.style.backgroundImage = urlString;
-                lockScreenControls.wallpaperPreview.style.backgroundColor = imageUrl ? 'transparent' : '#ffffff';
-                lockScreenSettings.wallpaper = imageUrl || '';
-                saveLockScreenSettings();
-            }
-
-            function applyLockScreenStyle() {
-                lockScreenTime.style.fontFamily = lockScreenSettings.clockFont;
-            }
-
-            document.getElementById('upload-lockscreen-wallpaper-btn').addEventListener('click', () => document.getElementById('lockscreen-wallpaper-file-input').click());
-            document.getElementById('lockscreen-wallpaper-file-input').addEventListener('change', (event) => { const file = event.target.files[0]; if (file) { const reader = new FileReader(); reader.onload = (e) => applyLockScreenWallpaper(e.target.result); reader.readAsDataURL(file); } });
-            lockScreenControls.wallpaperUrlInput.addEventListener('input', (e) => applyLockScreenWallpaper(e.target.value.trim()));
-            lockScreenControls.restoreWallpaperBtn.addEventListener('click', () => { applyLockScreenWallpaper(''); lockScreenControls.wallpaperUrlInput.value = ''; });
-
-            lockScreenControls.enablePasscodeToggle.addEventListener('change', (e) => { lockScreenSettings.passcodeEnabled = e.target.checked; saveLockScreenSettings(); });
-            lockScreenControls.passcodeInput.addEventListener('input', (e) => { if (e.target.value.length > 6) e.target.value = e.target.value.slice(0, 6); });
-            lockScreenControls.passcodeInput.addEventListener('change', (e) => { lockScreenSettings.passcode = e.target.value; saveLockScreenSettings(); });
-            lockScreenControls.dateFormatInput.addEventListener('input', (e) => { lockScreenSettings.dateFormat = e.target.value; saveLockScreenSettings(); });
-            lockScreenControls.clockFontSelect.addEventListener('change', (e) => { lockScreenSettings.clockFont = e.target.value; saveLockScreenSettings(); applyLockScreenStyle(); });
             
-            lockScreenControls.restoreSettingsBtn.addEventListener('click', () => {
-                lockScreenSettings = { ...defaultLockScreenSettings, wallpaper: lockScreenSettings.wallpaper }; // Keep wallpaper
-                saveLockScreenSettings();
-                loadLockScreenSettings();
-                applyLockScreenStyle();
-            });
+            let promptResolve = null; function showCustomPrompt(title, placeholder) { apiPromptControls.title.textContent = title; apiPromptControls.input.placeholder = placeholder; apiPromptControls.input.value = ''; apiPromptControls.overlay.classList.add('visible'); apiPromptControls.input.focus(); return new Promise(resolve => { promptResolve = resolve; }); } function hideCustomPrompt() { apiPromptControls.overlay.classList.remove('visible'); promptResolve = null; } apiPromptControls.confirmBtn.addEventListener('click', () => { if (promptResolve) promptResolve(apiPromptControls.input.value); hideCustomPrompt(); }); apiPromptControls.cancelBtn.addEventListener('click', () => { if (promptResolve) promptResolve(null); hideCustomPrompt(); }); apiPromptControls.overlay.addEventListener('click', (e) => { if (e.target === apiPromptControls.overlay) { if (promptResolve) promptResolve(null); hideCustomPrompt(); } });
 
-            function loadLockScreenSettings() {
-                applyLockScreenWallpaper(lockScreenSettings.wallpaper);
-                lockScreenControls.wallpaperUrlInput.value = lockScreenSettings.wallpaper;
-                lockScreenControls.enablePasscodeToggle.checked = lockScreenSettings.passcodeEnabled;
-                lockScreenControls.passcodeInput.value = lockScreenSettings.passcode;
-                lockScreenControls.dateFormatInput.value = lockScreenSettings.dateFormat;
-                lockScreenControls.clockFontSelect.value = lockScreenSettings.clockFont;
+            function showApiSubPage(pageName) {
+                apiPageControls.configPage.classList.remove('active'); apiPageControls.presetsPage.classList.remove('active'); apiPageControls.navConfigBtn.classList.remove('active'); apiPageControls.navPresetsBtn.classList.remove('active');
+                if (pageName === 'config') { apiPageControls.configPage.classList.add('active'); apiPageControls.navConfigBtn.classList.add('active'); apiPageControls.title.textContent = 'API 配置'; } 
+                else if (pageName === 'presets') { apiPageControls.presetsPage.classList.add('active'); apiPageControls.navPresetsBtn.classList.add('active'); apiPageControls.title.textContent = '我的预设'; renderPresets(); }
             }
 
-            // Unlock Logic
-            let touchStartY = 0;
-            lockScreen.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; }, { passive: true });
-            lockScreen.addEventListener('touchend', (e) => {
-                const touchEndY = e.changedTouches[0].clientY;
-                if (touchStartY - touchEndY > 50) { // Swiped up
-                    if (lockScreenSettings.passcodeEnabled && lockScreenSettings.passcode) {
-                        lockScreen.classList.add('hidden');
-                        passcodeScreen.classList.add('visible');
-                    } else {
-                        unlockDevice();
-                    }
-                }
-            }, { passive: true });
-            
-            function unlockDevice() {
-                lockScreen.classList.add('hidden');
-                passcodeScreen.classList.remove('visible');
-                document.body.style.overflow = 'auto';
-                pages.desktop.classList.add('active'); // Ensure desktop is active
-                setTimeout(() => { lockScreen.style.display = 'none'; }, 300); // Hide for performance
-            }
+            function getPresets() { return JSON.parse(localStorage.getItem('apiPresets')) || []; }
+            function savePresets(presets) { localStorage.setItem('apiPresets', JSON.stringify(presets)); }
 
-            // Passcode Logic
-            const passcodeDots = passcodeScreen.querySelectorAll('.passcode-dot');
-            let currentPasscodeInput = '';
-            passcodeScreen.querySelector('.passcode-keyboard').addEventListener('click', (e) => {
-                if (!e.target.classList.contains('keyboard-btn')) return;
-                const key = e.target.dataset.key;
-                if (key === 'del') {
-                    currentPasscodeInput = currentPasscodeInput.slice(0, -1);
-                } else if (currentPasscodeInput.length < 6) {
-                    currentPasscodeInput += key;
-                }
-                updatePasscodeDots();
-                if (currentPasscodeInput.length === 6) {
-                    checkPasscode();
-                }
-            });
-
-            function updatePasscodeDots() {
-                passcodeDots.forEach((dot, index) => {
-                    dot.classList.toggle('filled', index < currentPasscodeInput.length);
+            function renderPresets() {
+                const presets = getPresets();
+                apiPageControls.presetsListContainer.innerHTML = '';
+                if (presets.length === 0) { apiPageControls.presetsListContainer.innerHTML = `<p style="text-align:center; color: var(--text-light);">暂无预设，请在“配置”页面连接成功后保存。</p>`; return; }
+                presets.forEach((preset, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'preset-list-item';
+                    item.innerHTML = `<span class="preset-name">${preset.name}</span><div class="preset-actions"><button class="btn btn-sm btn-apply">应用</button><button class="btn btn-sm btn-delete">删除</button></div>`;
+                    item.querySelector('.btn-apply').addEventListener('click', () => loadPreset(index));
+                    item.querySelector('.btn-delete').addEventListener('click', () => deletePreset(index));
+                    apiPageControls.presetsListContainer.appendChild(item);
                 });
             }
+            
+            function loadPreset(index) {
+                const presets = getPresets();
+                if (presets[index]) {
+                    applyApiSettings(presets[index].settings);
+                    alert(`预设 “${presets[index].name}” 已应用并加载模型！`);
+                    showApiSubPage('config');
+                }
+            }
 
-            function checkPasscode() {
-                if (currentPasscodeInput === lockScreenSettings.passcode) {
-                    setTimeout(unlockDevice, 200);
+            function deletePreset(index) {
+                const presets = getPresets();
+                if (!confirm(`确定要删除预设 “${presets[index].name}” 吗？`)) return;
+                presets.splice(index, 1);
+                savePresets(presets);
+                renderPresets();
+            }
+            
+            async function fetchModels(url, key, useProxy) { apiConfigControls.status.textContent = '正在拉取模型列表...'; apiConfigControls.status.className = ''; try { const baseUrl = useProxy ? CORS_PROXY_URL + encodeURIComponent(url) : url; const finalUrl = `${baseUrl.replace(/\/$/, "")}/models`; const response = await fetch(finalUrl, { method: 'GET', headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' }, mode: 'cors' }); if (!response.ok) { const errorText = await response.text(); throw new Error(`HTTP ${response.status}: ${errorText.slice(0, 100)}`); } const data = await response.json(); apiConfigControls.status.textContent = '模型列表拉取成功！'; apiConfigControls.status.classList.add('success'); const models = data.data || data; if (!Array.isArray(models)) throw new Error('返回数据格式不正确'); return models.map(model => model.id).sort(); } catch (error) { apiConfigControls.status.textContent = `拉取失败: ${error.message}`; apiConfigControls.status.classList.add('error'); return []; } }
+            
+            function updateControlsForProvider() { const provider = apiConfigControls.provider.value; const data = providerData[provider]; apiConfigControls.urlInput.value = data.url; const isPolling = provider === 'polling'; apiConfigControls.keyInput.style.display = isPolling ? 'none' : 'block'; apiConfigControls.keyTextarea.style.display = isPolling ? 'block' : 'none'; apiConfigControls.toggleKey.style.display = isPolling ? 'none' : 'inline-block'; apiConfigControls.model.innerHTML = ''; const placeholderText = data.modelsEndpoint === false ? '此服务商不支持自动拉取模型' : '请先进行连接测试来拉取模型'; const option = document.createElement('option'); option.textContent = placeholderText; apiConfigControls.model.appendChild(option); }
+            
+            function getCurrentApiSettings(modelsList = []) {
+                const provider = apiConfigControls.provider.value;
+                return {
+                    provider: provider,
+                    url: apiConfigControls.urlInput.value,
+                    key: provider === 'polling' ? apiConfigControls.keyTextarea.value : apiConfigControls.keyInput.value,
+                    model: apiConfigControls.model.value,
+                    models: modelsList
+                };
+            }
+
+            function applyApiSettings(settings) {
+                apiConfigControls.provider.value = settings.provider || 'openai';
+                updateControlsForProvider();
+                apiConfigControls.urlInput.value = settings.url;
+                if (settings.provider === 'polling') {
+                    apiConfigControls.keyTextarea.value = settings.key;
                 } else {
-                    passcodeScreen.classList.add('shake');
-                    setTimeout(() => {
-                        passcodeScreen.classList.remove('shake');
-                        currentPasscodeInput = '';
-                        updatePasscodeDots();
-                    }, 500);
+                    apiConfigControls.keyInput.value = settings.key;
                 }
-            }
-            
-            // Date & Time Update
-            function updateLockScreenDateTime() {
-                const now = new Date();
-                lockScreenTime.textContent = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
-                lockScreenDate.textContent = formatDate(now, lockScreenSettings.dateFormat);
-            }
-
-            function formatDate(date, format) {
-                const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
-                let formatted = format.replace('x月', date.getMonth() + 1)
-                                      .replace('x日', date.getDate())
-                                      .replace('星期x', weekdays[date.getDay()]);
-                if (formatted.includes('农历时间')) {
-                    formatted = formatted.replace('农历时间', getLunarDate(date));
+                
+                apiConfigControls.model.innerHTML = '';
+                if (settings.models && settings.models.length > 0) {
+                    settings.models.forEach(modelName => {
+                        const option = document.createElement('option');
+                        option.value = modelName;
+                        option.textContent = modelName;
+                        apiConfigControls.model.appendChild(option);
+                    });
+                    apiConfigControls.status.textContent = '预设已应用，模型列表已加载。';
+                    apiConfigControls.status.className = 'success';
+                } else {
+                    const option = document.createElement('option');
+                    option.textContent = '请先进行连接测试来拉取模型';
+                    apiConfigControls.model.appendChild(option);
+                    apiConfigControls.status.textContent = '';
+                    apiConfigControls.status.className = '';
                 }
-                return formatted;
-            }
-            
-            function getLunarDate(date) { // Simplified Lunar Date
-                const lunarData = ['甲子', '乙丑', '丙寅', '丁卯', '戊辰', '己巳', '庚午', '辛未', '壬申', '癸酉', '甲戌', '乙亥', '丙子', '丁丑', '戊寅', '己卯', '庚辰', '辛巳', '壬午', '癸未', '甲申', '乙酉', '丙戌', '丁亥', '戊子', '己丑', '庚寅', '辛卯', '壬辰', '癸巳', '甲午', '乙未', '丙申', '丁酉', '戊戌', '己亥', '庚子', '辛丑', '壬寅', '癸卯', '甲辰', '乙巳', '丙午', '丁未', '戊申', '己酉', '庚戌', '辛亥', '壬子', '癸丑', '甲寅', '乙卯', '丙辰', '丁巳', '戊午', '己未', '庚申', '辛酉', '壬戌', '癸亥'];
-                const lunarMonths = ['正月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '冬月', '腊月'];
-                const lunarDays = ['初一', '初二', '初三', '初四', '初五', '初六', '初七', '初八', '初九', '初十', '十一', '十二', '十三', '十四', '十五', '十六', '十七', '十八', '十九', '二十', '廿一', '廿二', '廿三', '廿四', '廿五', '廿六', '廿七', '廿八', '廿九', '三十'];
-                // This is a placeholder, a real conversion is much more complex
-                const dayOfYear = Math.floor((date - new Date(date.getFullYear(), 0, 0)) / (1000 * 60 * 60 * 24));
-                return `${lunarData[date.getFullYear() % 60]}年 ${lunarMonths[date.getMonth()]} ${lunarDays[date.getDate() - 1]}`;
+                apiConfigControls.model.value = settings.model;
             }
 
-            // --- 原有JS及初始化 ---
-            updateTime(); setInterval(updateTime, 30000);
-            updateBatteryStatus();
-            
-            function updateAvatarImages(imageUrl) {
-                document.getElementById('avatar-container').style.backgroundImage = `url('${imageUrl}')`;
-                document.getElementById('preview-avatar').style.backgroundImage = `url('${imageUrl}')`;
+            function saveCurrentApiSettings() {
+                localStorage.setItem('apiSettings', JSON.stringify(getCurrentApiSettings()));
+                alert('API 设置已保存!');
             }
 
-            function setupImageUpload(triggerId, inputId, callback) {
-                const trigger = document.getElementById(triggerId);
-                const input = document.getElementById(inputId);
-                trigger.addEventListener('click', () => input.click());
-                input.addEventListener('change', (event) => {
-                    const file = event.target.files[0];
-                    if (file) {
-                        const objectURL = URL.createObjectURL(file);
-                        callback(objectURL);
+            function loadLastApiSettings() {
+                const settingsJSON = localStorage.getItem('apiSettings');
+                if (settingsJSON) { applyApiSettings(JSON.parse(settingsJSON)); } 
+                else { updateControlsForProvider(); }
+            }
+
+            function isExistingPreset(currentSettings) {
+                const presets = getPresets();
+                return presets.some(p =>
+                    p.settings.provider === currentSettings.provider &&
+                    p.settings.url === currentSettings.url &&
+                    p.settings.key === currentSettings.key
+                );
+            }
+
+            async function testAndFetch() {
+                const provider = apiConfigControls.provider.value, config = providerData[provider];
+                if (!config.testable) { apiConfigControls.status.textContent = '此服务商不支持自动拉取模型。'; return; }
+                const url = apiConfigControls.urlInput.value.trim();
+                let key = provider === 'polling' ? apiConfigControls.keyTextarea.value.split('\n')[0].trim() : apiConfigControls.keyInput.value.trim();
+                if (!url || !key) { apiConfigControls.status.textContent = 'URL 和 Key 不能为空。'; apiConfigControls.status.classList.add('error'); return; }
+                
+                const currentConfigForCheck = getCurrentApiSettings();
+                const models = await fetchModels(url, key, config.useProxy);
+                
+                if (models.length > 0) {
+                    const currentModel = apiConfigControls.model.value;
+                    apiConfigControls.model.innerHTML = '';
+                    models.forEach(modelName => {
+                        const option = document.createElement('option');
+                        option.value = modelName; option.textContent = modelName;
+                        apiConfigControls.model.appendChild(option);
+                    });
+                    if (models.includes(currentModel)) { apiConfigControls.model.value = currentModel; }
+
+                    if (!isExistingPreset(currentConfigForCheck)) {
+                        const presetName = await showCustomPrompt('连接成功！', '为此配置命名以保存为预设');
+                        if (presetName && presetName.trim() !== '') {
+                            const presets = getPresets();
+                            const newPreset = { name: presetName.trim(), settings: getCurrentApiSettings(models) };
+                            presets.push(newPreset);
+                            savePresets(presets);
+                            alert(`预设 “${presetName.trim()}” 已保存！`);
+                        }
                     }
-                });
+                }
+            }
+
+            apiPageControls.navConfigBtn.addEventListener('click', () => showApiSubPage('config'));
+            apiPageControls.navPresetsBtn.addEventListener('click', () => showApiSubPage('presets'));
+            apiConfigControls.provider.addEventListener('change', updateControlsForProvider);
+            apiConfigControls.toggleKey.addEventListener('click', () => { apiConfigControls.keyInput.type = apiConfigControls.keyInput.type === 'password' ? 'text' : 'password'; });
+            apiConfigControls.saveBtn.addEventListener('click', saveCurrentApiSettings);
+            apiConfigControls.testBtn.addEventListener('click', testAndFetch);
+            apiConfigControls.restoreBtn.addEventListener('click', () => { localStorage.removeItem('apiSettings'); apiConfigControls.provider.value = 'openai'; apiConfigControls.keyInput.value = ''; apiConfigControls.keyTextarea.value = ''; loadLastApiSettings(); alert('已恢复默认设置。'); });
+            
+            loadLastApiSettings();
+            showApiSubPage('config');
+            // --- END: API Config Page Logic ---
+
+            // --- 全局初始化 ---
+            (async () => {
+                await openDb();
+                await renderSavedFontsList();
+                updateFontPreview();
+                wallpaperControls.previewSection.style.display = wallpaperControls.previewEnabledCheckbox.checked ? 'block' : 'none';
+                applyThemeColor(themeControls.hexInput.value);
+                applyAvatarFrame();
+                applyAvatarFrameTransform();
+                updateTime(); 
+                setInterval(updateTime, 30000);
+                updateBatteryStatus();
+            })();
+            
+            // --- 桌面图片上传初始化 ---
+            function updateAvatarImages(imageUrl) { document.getElementById('avatar-container').style.backgroundImage = `url('${imageUrl}')`; document.getElementById('preview-avatar').style.backgroundImage = `url('${imageUrl}')`; }
+            function setupImageUpload(triggerId, inputId, callback) {
+                const trigger = document.getElementById(triggerId); const input = document.getElementById(inputId);
+                trigger.addEventListener('click', () => input.click());
+                input.addEventListener('change', (event) => { const file = event.target.files[0]; if (file) { const objectURL = URL.createObjectURL(file); callback(objectURL); } });
             }
             setupImageUpload('avatar-container', 'avatar-upload', updateAvatarImages);
             setupImageUpload('profile-banner', 'banner-upload', (result) => document.getElementById('profile-banner').style.backgroundImage = `url('${result}')`);
             setupImageUpload('widget-left', 'widget-left-upload', (result) => document.getElementById('widget-left').style.backgroundImage = `url('${result}')`);
-
-            const modal = { overlay: document.getElementById('edit-modal'), title: document.getElementById('modal-title'), input: document.getElementById('modal-input'), save: document.getElementById('modal-save'), cancel: document.getElementById('modal-cancel') };
-            let currentEditingElement = null;
-            function openModal(element, title) { currentEditingElement = element; modal.title.textContent = title; modal.input.value = element.textContent; modal.overlay.classList.add('visible'); modal.input.focus(); }
-            function closeModal() { modal.overlay.classList.remove('visible'); }
-            modal.save.addEventListener('click', () => { if (currentEditingElement) currentEditingElement.textContent = modal.input.value; closeModal(); });
-            modal.cancel.addEventListener('click', closeModal);
-            modal.overlay.addEventListener('click', (e) => { if (e.target === modal.overlay) closeModal(); });
-            document.querySelector('.nickname').addEventListener('click', (e) => openModal(e.target, '编辑昵称'));
-            document.querySelector('.username').addEventListener('click', (e) => openModal(e.target, '编辑ID'));
-            document.querySelector('.bio').addEventListener('click', (e) => openModal(e.target, '编辑签名'));
-            document.querySelector('.location span').addEventListener('click', (e) => openModal(e.target, '编辑地点'));
-            
-            // 初始化
-            showPage(pages.desktop); // Start at desktop, but lockscreen will overlay it
-            lockScreen.classList.remove('hidden');
-            lockScreen.style.display = 'flex';
-            
-            updateFontPreview();
-            applyThemeColor(themeControls.hexInput.value);
-            applyAvatarFrame();
-            applyAvatarFrameTransform();
-            
-            loadLockScreenSettings();
-            applyLockScreenStyle();
-            updateLockScreenDateTime();
-            setInterval(updateLockScreenDateTime, 1000); // Update lock screen time every second
         });
 
+        // --- 系统状态函数 ---
         function updateBatteryStatus() { if ('getBattery' in navigator) { navigator.getBattery().then(function(battery) { const container = document.getElementById('battery-container'); function updateAll() { container.classList.toggle('battery-charging', battery.charging); container.classList.toggle('battery-low', !battery.charging && battery.level <= 0.2); updateBatteryLevel(battery.level); } updateAll(); battery.addEventListener('chargingchange', updateAll); battery.addEventListener('levelchange', updateAll); }); } else { updateBatteryLevel(0.88); } }
         function updateBatteryLevel(level) { const fill = document.getElementById('battery-fill'); if(fill) fill.setAttribute('width', String(Math.max(2, Math.floor(22 * level)))); }
         function updateTime() { const now = new Date(); const timeDisplay = document.getElementById('current-time'); if (timeDisplay) timeDisplay.textContent = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`; }
